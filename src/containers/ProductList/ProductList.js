@@ -4,9 +4,7 @@ import Product from "../../components/Product/Product";
 
 import { brandFilter } from "../../pipes/brandFilter";
 import { orderByFilter } from "../../pipes/orderByFilter";
-import LayoutMode from "../../components/LayoutMode/LayoutMode";
 import { paginationPipe } from "../../pipes/paginationFilter";
-import Pagination from "../../components/Pagination/Pagination";
 
 class ProductList extends Component {
   state = {
@@ -54,8 +52,6 @@ class ProductList extends Component {
   };
 
   render() {
-    // let isActive = this.state.colValue[this.state.colValue.length - 1];
-
     return (
       <div className="col-lg-9">
         <div className="row mb-3">
@@ -63,16 +59,6 @@ class ProductList extends Component {
             <div className="card ">
               <div className="card-header d-flex justify-content-end">
                 <span className="mr-3">Cambiar Layout: </span>
-                <LayoutMode
-                  len={3}
-                  isActive={this.state.gridValue === 3}
-                  click={this.changeLayout}
-                />
-                <LayoutMode
-                  len={4}
-                  isActive={this.state.gridValue === 4}
-                  click={this.changeLayout}
-                />
               </div>
             </div>
           </div>
@@ -87,17 +73,7 @@ class ProductList extends Component {
             );
           })}
         </div>
-        <div className="d-flex justify-content-end">
-          <Pagination
-            totalItemsCount={this.props.products.length}
-            currentPage={this.state.currentPage}
-            perPage={this.state.perPage}
-            pagesToShow={this.state.pagesToShow}
-            onGoPage={this.goPage}
-            onPrevPage={this.onPrev}
-            onNextPage={this.onNext}
-          />
-        </div>
+        <div className="d-flex justify-content-end"></div>
       </div>
     );
   }

@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./OrderFilter.scss";
 import {
-  clearOrderBy,
   ORDER_BY_ASC,
   ORDER_BY_DESC,
   orderByAsc,
   orderByDesc,
+  clearOrderBy,
 } from "../../redux/actions/order";
 
-const OrderFilter = ({ dispatch }) => {
+const OrderFilter = () => {
+  const dispatch = useDispatch();
+
   let removeSelected;
   const [selected, setSelected] = useState("");
 
@@ -38,7 +40,7 @@ const OrderFilter = ({ dispatch }) => {
   if (selected) {
     removeSelected = (
       <span onClick={removeFilter} className="text-remove-selected text-right">
-        Quitar filtro
+        Quitar
       </span>
     );
   }
@@ -82,4 +84,4 @@ const OrderFilter = ({ dispatch }) => {
   );
 };
 
-export default connect()(OrderFilter);
+export default OrderFilter;
