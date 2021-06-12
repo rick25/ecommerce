@@ -11,16 +11,14 @@ const initialState = {
   cart: [],
 };
 
-const shopReducer = (state = initialState, action) => {
+const shopReducer = (state = initialState, { type, payload }) => {
   let updatedCart;
   let updatedItemIndex;
 
-  switch (action.type) {
+  switch (type) {
     case INCREMENT_CART_ITEM_QUANTITY:
       updatedCart = [...state.cart];
-      updatedItemIndex = updatedCart.findIndex(
-        (item) => item.id === action.payload
-      );
+      updatedItemIndex = updatedCart.findIndex((item) => item.id === payload);
 
       const incrementedItem = {
         ...updatedCart[updatedItemIndex],
@@ -34,9 +32,7 @@ const shopReducer = (state = initialState, action) => {
 
     case DECREMENT_CART_ITEM_QUANTITY:
       updatedCart = [...state.cart];
-      updatedItemIndex = updatedCart.findIndex(
-        (item) => item.id === action.payload
-      );
+      updatedItemIndex = updatedCart.findIndex((item) => item.id === payload);
 
       const decrementedItem = {
         ...updatedCart[updatedItemIndex],
@@ -51,11 +47,11 @@ const shopReducer = (state = initialState, action) => {
     case ADD_PRODUCT_TO_CART:
       updatedCart = [...state.cart];
       updatedItemIndex = updatedCart.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item.id === payload.id
       );
 
       if (updatedItemIndex < 0) {
-        updatedCart.push({ ...action.payload, quantity: 1 });
+        updatedCart.push({ ...payload, quantity: 1 });
       } else {
         const updatedItem = {
           ...updatedCart[updatedItemIndex],
@@ -69,9 +65,7 @@ const shopReducer = (state = initialState, action) => {
 
     case REMOVE_PRODUCT_FROM_CART:
       updatedCart = [...state.cart];
-      updatedItemIndex = updatedCart.findIndex(
-        (item) => item.id === action.payload
-      );
+      updatedItemIndex = updatedCart.findIndex((item) => item.id === payload);
 
       updatedCart.splice(updatedItemIndex, 1);
 

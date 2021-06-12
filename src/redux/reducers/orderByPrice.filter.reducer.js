@@ -4,8 +4,8 @@ import {
   ORDER_BY_DESC,
 } from "../actions/order";
 
-export const orderByPriceReducer = (state = "", action) => {
-  switch (action.type) {
+export const orderByPriceReducer = (state = "", { type }) => {
+  switch (type) {
     case ORDER_BY_ASC:
       return "asc";
     case ORDER_BY_DESC:

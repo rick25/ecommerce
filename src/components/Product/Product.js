@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { formatMoney } from "../../pipes/priceFormatter";
 import { cumulativeOffSet } from "../../utilities/cumulativeOffset";
@@ -9,6 +9,7 @@ import SlideDots from "../SlideDots/SlideDots";
 import { addProductToCart } from "../../redux/actions/shop";
 
 const Product = (props) => {
+  const dispatch = useDispatch();
   const { title, price, images, description, id } = props.product;
 
   const imageRef = React.createRef();
@@ -77,7 +78,7 @@ const Product = (props) => {
         <p className="card-text product__description">{description}</p>
         <button
           onClick={() => {
-            props.dispatch(addProductToCart({ ...props.product }));
+            dispatch(addProductToCart({ ...props.product }));
           }}
           className="btn btn-info product__add-to-cart"
         >
@@ -88,4 +89,4 @@ const Product = (props) => {
   );
 };
 
-export default connect()(Product);
+export default Product;

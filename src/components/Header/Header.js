@@ -1,8 +1,11 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
 
-const Header = ({ cartLength }) => {
+const Header = () => {
+  const cart = useSelector((state) => state.shop.cart);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div className="container">
@@ -13,8 +16,8 @@ const Header = ({ cartLength }) => {
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <NavLink className="nav-link" to={"/cart"}>
-                <i className="fa fa-shopping-cart mr-2" aria-hidden="true" />
-                Carrito {cartLength ? `(${cartLength})` : ""}
+                <FaShoppingCart className="mr-2 mb-1" />
+                Carrito {cart.length ? `(${cart.length})` : ""}
               </NavLink>
             </li>
           </ul>
@@ -24,10 +27,4 @@ const Header = ({ cartLength }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cartLength: state.shop.cart.length,
-  };
-};
-
-export default connect(mapStateToProps, null)(Header);
+export default Header;
