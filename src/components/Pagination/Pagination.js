@@ -1,45 +1,34 @@
-import React, { Component } from "react";
-// import { connect } from "react-redux";
-// import { goPage, nextPage, prevPage } from "../../actions";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { goPage, nextPage, prevPage } from "../../redux/actions/paginaton";
 
-class Pagination extends Component {
-  onPage(n) {
-    this.props.onGoPage(n);
-  }
+const Pagination = (props) => {
+  const dispatch = useDispatch();
 
-  isOnLastPage() {
-    return (
-      this.props.perPage * this.props.currentPage >= this.props.totalItemsCount
-    );
-  }
+  const isOnLastPage = () => {
+    return props.perPage * props.currentPage >= props.totalItemsCount;
+  };
 
-  totalPages() {
-    return Math.ceil(this.props.totalItemsCount / this.props.perPage) || 0;
-  }
+  const totalPages = () => {
+    return Math.ceil(props.totalItemsCount / props.perPage) || 0;
+  };
 
-  getMin() {
-    return this.props.perPage * this.props.currentPage - this.props.perPage + 1;
-  }
+  const getMin = () => {
+    return props.perPage * props.currentPage - props.perPage + 1;
+  };
 
-  getMax() {
-    let max = this.props.perPage * this.props.currentPage;
-    if (max > this.props.totalItemsCount) {
-      max = this.props.totalItemsCount;
+  const getMax = () => {
+    let max = props.perPage * props.currentPage;
+    if (max > props.totalItemsCount) {
+      max = props.totalItemsCount;
     }
     return max;
-  }
-  onPrev = () => {
-    this.props.onPrevPage();
   };
 
-  onNext = () => {
-    this.props.onNextPage();
-  };
-
-  getPages = () => {
-    const c = Math.ceil(this.props.totalItemsCount / this.props.perPage);
-    const p = this.props.currentPage || 1;
-    const pagesToShow = this.props.pagesToShow || 9;
+  const getPages = () => {
+    const c = Math.ceil(props.totalItemsCount / props.perPage);
+    const p = props.currentPage || 1;
+    const pagesToShow = props.pagesToShow || 9;
     const pages = [];
     pages.push(p);
     const times = pagesToShow - 1;
@@ -59,69 +48,75 @@ class Pagination extends Component {
     return pages;
   };
 
-  render() {
-    const pages = this.getPages().map((pageNum) => {
-      let buttonClass = "page-item";
+  const pages = getPages().map((pageNum) => {
+    let buttonClass = "page-item";
 
-      if (pageNum === this.props.currentPage) {
-        buttonClass += " active";
-      }
-
-      return (
-        <li
-          key={pageNum}
-          className={buttonClass}
-          onClick={() => {
-            this.onPage(pageNum);
-          }}
-        >
-          <button className="page-link">{pageNum}</button>
-        </li>
-      );
-    });
-
-    let prevButtonClass = "page-item";
-
-    if (this.props.currentPage === 1) {
-      prevButtonClass += " disabled";
+    if (pageNum === props.currentPage) {
+      buttonClass += " active";
     }
-
-    const prevButton = (
-      <li className={prevButtonClass}>
-        <button className="page-link" onClick={this.onPrev} tabIndex="-1">
-          Anterior
-        </button>
-      </li>
-    );
-
-    let nextButtonClass = "page-item";
-
-    if (this.isOnLastPage()) {
-      nextButtonClass += " disabled";
-    }
-
-    const nextButton = (
-      <li className={nextButtonClass}>
-        <button
-          disabled={this.isOnLastPage()}
-          className="page-link"
-          onClick={this.onNext}
-        >
-          Siguiente
-        </button>
-      </li>
-    );
 
     return (
-      <nav aria-label="...">
-        <ul className="pagination">
-          {prevButton}
-          {pages}
-          {nextButton}
-        </ul>
-      </nav>
+      <li
+        key={pageNum}
+        className={buttonClass}
+        onClick={() => {
+          dispatch(goPage(pageNum));
+        }}
+      >
+        <button className="page-link">{pageNum}</button>
+      </li>
     );
+  });
+
+  let prevButtonClass = "page-item";
+
+  if (props.currentPage === 1) {
+    prevButtonClass += " disabled";
   }
-}
+
+  const prevButton = (
+    <li className={prevButtonClass}>
+      <button
+        className="page-link"
+        onClick={() => {
+          dispatch(prevPage());
+        }}
+        tabIndex="-1"
+      >
+        Anterior
+      </button>
+    </li>
+  );
+
+  let nextButtonClass = "page-item";
+
+  if (isOnLastPage()) {
+    nextButtonClass += " disabled";
+  }
+
+  const nextButton = (
+    <li className={nextButtonClass}>
+      <button
+        disabled={isOnLastPage()}
+        className="page-link"
+        onClick={() => {
+          dispatch(nextPage());
+        }}
+      >
+        Siguiente
+      </button>
+    </li>
+  );
+
+  return (
+    <nav aria-label="...">
+      <ul className="pagination">
+        {prevButton}
+        {pages}
+        {nextButton}
+      </ul>
+    </nav>
+  );
+};
 
 export default Pagination;

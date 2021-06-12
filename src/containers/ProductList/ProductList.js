@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Product from "../../components/Product/Product";
 import Pagination from "../../components/Pagination/Pagination";
+import LayoutMode from "../../components/LayoutMode/LayoutMode";
 
 import { brandFilter } from "../../pipes/brandFilter";
 import { orderByFilter } from "../../pipes/orderByFilter";
 import { paginationPipe } from "../../pipes/paginationFilter";
 
 const ProductList = () => {
+  const { perPage, currentPage, pagesToShow } = useSelector(
+    (state) => state.pagination
+  );
+
   const [estado, setEstado] = useState({
     colValue: "col-lg-4",
-    perPage: 12,
-    currentPage: 1,
-    pagesToShow: 3,
     gridValue: 3,
   });
 
@@ -26,12 +28,7 @@ const ProductList = () => {
     return filterByOrderArr;
   });
 
-  /*
   const changeLayout = (n) => {
-    setEstado({
-      gridValue: n,
-    });
-
     let realGridValue;
 
     if (n === 4) {
@@ -41,28 +38,8 @@ const ProductList = () => {
     }
 
     setEstado({
+      gridValue: n,
       colValue: `col-lg-${realGridValue}`,
-    });
-  };
-  */
-
-  const onPrev = () => {
-    const updatedState = { ...estado };
-    updatedState.currentPage = estado.currentPage - 1;
-    setEstado(updatedState);
-  };
-
-  const onNext = () => {
-    setEstado({
-      ...estado,
-      currentPage: estado.currentPage + 1,
-    });
-  };
-
-  const goPage = (n) => {
-    setEstado({
-      ...estado,
-      currentPage: n,
     });
   };
 
@@ -72,7 +49,17 @@ const ProductList = () => {
         <div className="col-12 d-none d-lg-block d-xl-block">
           <div className="card ">
             <div className="card-header d-flex justify-content-end">
-              <span className="mr-3">Cambiar Layout: </span>
+              <span className="mr-3">Cambiar Columnas: </span>
+              <LayoutMode
+                len={3}
+                isActive={estado.gridValue === 3}
+                click={() => changeLayout(3)}
+              />
+              <LayoutMode
+                len={4}
+                isActive={estado.gridValue === 4}
+                click={() => changeLayout(4)}
+              />
             </div>
           </div>
         </div>
@@ -90,12 +77,9 @@ const ProductList = () => {
       <div className="d-flex justify-content-end">
         <Pagination
           totalItemsCount={products.length}
-          currentPage={estado.currentPage}
-          perPage={estado.perPage}
-          pagesToShow={estado.pagesToShow}
-          onGoPage={goPage}
-          onPrevPage={onPrev}
-          onNextPage={onNext}
+          currentPage={currentPage}
+          perPage={perPage}
+          pagesToShow={pagesToShow}
         />
       </div>
     </div>

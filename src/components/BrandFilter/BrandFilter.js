@@ -10,14 +10,17 @@ import {
 const BrandFilter = () => {
   const dispatch = useDispatch();
 
-  const brandItemsCount = useSelector((state) => {
+  const { brandItemsCount, brandFilter } = useSelector((state) => {
     const brandItemsCount = {};
 
     state.shop.products.forEach((p) => {
       brandItemsCount[p.brand] = brandItemsCount[p.brand] + 1 || 1;
     });
 
-    return brandItemsCount;
+    return {
+      brandItemsCount,
+      brandFilter: state.brandFilter,
+    };
   });
 
   const handleSelectBox = (e) => {
@@ -43,7 +46,8 @@ const BrandFilter = () => {
                 type="checkbox"
                 name={brand}
                 className="custom-checkbox__input"
-                onInput={handleSelectBox}
+                onChange={handleSelectBox}
+                checked={brandFilter.includes(brand)}
               />
               <span className="custom-checkbox__span"></span>
             </label>
