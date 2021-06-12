@@ -6,9 +6,9 @@ import {
 } from "../actions/paginaton";
 
 const initialState = {
-  perPage: 2,
+  perPage: 4,
   currentPage: 1,
-  pagesToShow: 3,
+  pagesToShow: 6,
   totalItemsCount: 0,
 };
 

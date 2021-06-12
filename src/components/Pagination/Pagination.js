@@ -9,21 +9,21 @@ const Pagination = (props) => {
     return props.perPage * props.currentPage >= props.totalItemsCount;
   };
 
-  const totalPages = () => {
-    return Math.ceil(props.totalItemsCount / props.perPage) || 0;
-  };
+  // const totalPages = () => {
+  //   return Math.ceil(props.totalItemsCount / props.perPage) || 0;
+  // };
 
-  const getMin = () => {
-    return props.perPage * props.currentPage - props.perPage + 1;
-  };
+  // const getMin = () => {
+  //   return props.perPage * props.currentPage - props.perPage + 1;
+  // };
 
-  const getMax = () => {
-    let max = props.perPage * props.currentPage;
-    if (max > props.totalItemsCount) {
-      max = props.totalItemsCount;
-    }
-    return max;
-  };
+  // const getMax = () => {
+  //   let max = props.perPage * props.currentPage;
+  //   if (max > props.totalItemsCount) {
+  //     max = props.totalItemsCount;
+  //   }
+  //   return max;
+  // };
 
   const getPages = () => {
     const c = Math.ceil(props.totalItemsCount / props.perPage);

@@ -65,7 +65,7 @@ const ProductList = () => {
         </div>
       </div>
       <div className="row">
-        {paginationPipe(products, estado).map((product) => {
+        {paginationPipe(products, { perPage, currentPage }).map((product) => {
           let classes = `${estado.colValue} col-md-6 mb-4`;
           return (
             <div className={classes} key={product.id}>
