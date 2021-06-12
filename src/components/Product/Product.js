@@ -6,7 +6,7 @@ import { cumulativeOffSet } from "../../utilities/cumulativeOffset";
 
 import "./Product.scss";
 import SlideDots from "../SlideDots/SlideDots";
-import { addProductToCart } from "../../redux/actions/shop";
+import { addProductToCart } from "../../redux/actions/cart";
 
 const Product = (props) => {
   const dispatch = useDispatch();

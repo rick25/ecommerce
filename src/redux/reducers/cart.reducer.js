@@ -3,7 +3,7 @@ import {
   DECREMENT_CART_ITEM_QUANTITY,
   INCREMENT_CART_ITEM_QUANTITY,
   REMOVE_PRODUCT_FROM_CART,
-} from "../actions/shop";
+} from "../actions/cart";
 import { phones } from "../../data/phones";
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
   cart: [],
 };
 
-const shopReducer = (state = initialState, { type, payload }) => {
+const cartReducer = (state = initialState, { type, payload }) => {
   let updatedCart;
   let updatedItemIndex;
 
@@ -76,4 +76,4 @@ const shopReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export default shopReducer;
+export default cartReducer;

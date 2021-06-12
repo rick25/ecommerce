@@ -13,7 +13,7 @@ const BrandFilter = () => {
   const { brandItemsCount, brandFilter } = useSelector((state) => {
     const brandItemsCount = {};
 
-    state.shop.products.forEach((p) => {
+    state.cart.products.forEach((p) => {
       brandItemsCount[p.brand] = brandItemsCount[p.brand] + 1 || 1;
     });
 

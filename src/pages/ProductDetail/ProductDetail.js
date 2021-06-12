@@ -5,7 +5,7 @@ import ProductSlider from "../../components/ProductSlider/ProductSlider";
 
 const ProductDetail = (props) => {
   const product = useSelector((state) =>
-    state.shop.products.find((product) => product.id === +props.match.params.id)
+    state.cart.products.find((product) => product.id === +props.match.params.id)
   );
 
   return (

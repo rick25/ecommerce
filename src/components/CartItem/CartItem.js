@@ -8,7 +8,7 @@ import {
   decrementCartQuantity,
   incrementCartQuantity,
   removeProductToCart,
-} from "../../redux/actions/shop";
+} from "../../redux/actions/cart";
 import { FaTrash } from "react-icons/fa";
 
 const CartItem = (props) => {

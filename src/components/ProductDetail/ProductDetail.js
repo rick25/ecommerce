@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { formatMoney } from "../../pipes/priceFormatter";
-import { addProductToCart } from "../../redux/actions/shop";
+import { addProductToCart } from "../../redux/actions/cart";
 
 const ProductDetail = (props) => {
   const dispatch = useDispatch();

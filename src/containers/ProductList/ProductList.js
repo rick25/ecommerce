@@ -22,7 +22,7 @@ const ProductList = () => {
     const brands = state.brandFilter;
     const orderBy = state.orderBy;
 
-    const filterByBrandArr = brandFilter(state.shop.products, brands);
+    const filterByBrandArr = brandFilter(state.cart.products, brands);
     const filterByOrderArr = orderByFilter(filterByBrandArr, orderBy);
 
     return filterByOrderArr;
