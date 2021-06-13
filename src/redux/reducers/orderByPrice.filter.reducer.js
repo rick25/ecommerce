@@ -4,7 +4,9 @@ import {
   ORDER_BY_DESC,
 } from "../actions/order";
 
-export const orderByPriceReducer = (state = "", { type }) => {
+const initialState = "";
+
+export const orderByPriceReducer = (state = initialState, { type }) => {
   switch (type) {
     case ORDER_BY_ASC:
       return "asc";

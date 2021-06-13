@@ -3,7 +3,9 @@ import {
   REMOVE_BRAND_FROM_FILTER,
 } from "../actions/brands";
 
-export const brandFilterReducer = (state = "", { type, payload }) => {
+const initialState = "";
+
+export const brandFilterReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ADD_BRAND_TO_FILTER:
       if (state.includes(payload)) return state;

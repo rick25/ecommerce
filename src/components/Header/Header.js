@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
-  const cart = useSelector((state) => state.cart.cart);
+  const cart = useSelector((state) => state.cart);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">

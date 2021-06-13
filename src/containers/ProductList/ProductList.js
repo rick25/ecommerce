@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Product from "../../components/Product/Product";
 import Pagination from "../../components/Pagination/Pagination";
 import LayoutMode from "../../components/LayoutMode/LayoutMode";
+import ReactLoading from "react-loading";
 
 import { brandFilter } from "../../pipes/brandFilter";
 import { orderByFilter } from "../../pipes/orderByFilter";
@@ -12,6 +13,7 @@ const ProductList = () => {
   const { perPage, currentPage, pagesToShow } = useSelector(
     (state) => state.pagination
   );
+  const { loading, error } = useSelector((state) => state.products);
 
   const [estado, setEstado] = useState({
     colValue: "col-lg-4",
@@ -22,7 +24,7 @@ const ProductList = () => {
     const brands = state.brandFilter;
     const orderBy = state.orderBy;
 
-    const filterByBrandArr = brandFilter(state.cart.products, brands);
+    const filterByBrandArr = brandFilter(state.products.products, brands);
     const filterByOrderArr = orderByFilter(filterByBrandArr, orderBy);
 
     return filterByOrderArr;
@@ -65,6 +67,12 @@ const ProductList = () => {
         </div>
       </div>
       <div className="row">
+        {loading && (
+          <div className={`col-md-12 text-center`}>
+            <ReactLoading type="cylon" color="#5a32a8" />
+          </div>
+        )}
+        {error && <span className="text-danger">{error}</span>}
         {paginationPipe(products, { perPage, currentPage }).map((product) => {
           let classes = `${estado.colValue} col-md-6 mb-4`;
           return (

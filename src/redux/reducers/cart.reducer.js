@@ -4,12 +4,8 @@ import {
   INCREMENT_CART_ITEM_QUANTITY,
   REMOVE_PRODUCT_FROM_CART,
 } from "../actions/cart";
-import { phones } from "../../data/phones";
 
-const initialState = {
-  products: phones,
-  cart: [],
-};
+const initialState = [];
 
 const cartReducer = (state = initialState, { type, payload }) => {
   let updatedCart;
@@ -17,7 +13,7 @@ const cartReducer = (state = initialState, { type, payload }) => {
 
   switch (type) {
     case INCREMENT_CART_ITEM_QUANTITY:
-      updatedCart = [...state.cart];
+      updatedCart = [...state];
       updatedItemIndex = updatedCart.findIndex((item) => item.id === payload);
 
       const incrementedItem = {
@@ -28,10 +24,10 @@ const cartReducer = (state = initialState, { type, payload }) => {
 
       updatedCart[updatedItemIndex] = incrementedItem;
 
-      return { ...state, cart: updatedCart };
+      return [...updatedCart];
 
     case DECREMENT_CART_ITEM_QUANTITY:
-      updatedCart = [...state.cart];
+      updatedCart = [...state];
       updatedItemIndex = updatedCart.findIndex((item) => item.id === payload);
 
       const decrementedItem = {
@@ -42,10 +38,10 @@ const cartReducer = (state = initialState, { type, payload }) => {
 
       updatedCart[updatedItemIndex] = decrementedItem;
 
-      return { ...state, cart: updatedCart };
+      return [...updatedCart];
 
     case ADD_PRODUCT_TO_CART:
-      updatedCart = [...state.cart];
+      updatedCart = [...state];
       updatedItemIndex = updatedCart.findIndex(
         (item) => item.id === payload.id
       );
@@ -61,15 +57,15 @@ const cartReducer = (state = initialState, { type, payload }) => {
         updatedCart[updatedItemIndex] = updatedItem;
       }
 
-      return { ...state, cart: updatedCart };
+      return [...updatedCart];
 
     case REMOVE_PRODUCT_FROM_CART:
-      updatedCart = [...state.cart];
+      updatedCart = [...state];
       updatedItemIndex = updatedCart.findIndex((item) => item.id === payload);
 
       updatedCart.splice(updatedItemIndex, 1);
 
-      return { ...state, cart: updatedCart };
+      return [...updatedCart];
 
     default:
       return state;

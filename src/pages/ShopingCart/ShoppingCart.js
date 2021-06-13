@@ -5,11 +5,11 @@ import CartItem from "../../components/CartItem/CartItem";
 
 const ShoppingCart = () => {
   const { cartItems, cartItemCount, totalPrice } = useSelector((state) => ({
-    cartItems: state.cart.cart,
-    cartItemCount: state.cart.cart.reduce((count, curItem) => {
+    cartItems: state.cart,
+    cartItemCount: state.cart.reduce((count, curItem) => {
       return count + curItem.quantity;
     }, 0),
-    totalPrice: state.cart.cart.reduce((count, curItem) => {
+    totalPrice: state.cart.reduce((count, curItem) => {
       return count + curItem.price * curItem.quantity;
     }, 0),
   }));

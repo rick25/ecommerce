@@ -2,8 +2,6 @@ var imagesMap = {};
 
 var images = document.querySelectorAll(".product-image");
 
-console.log(images);
-
 images.forEach((img) => {
   if (!imagesMap[img.title]) {
     imagesMap[img.title] = [];
